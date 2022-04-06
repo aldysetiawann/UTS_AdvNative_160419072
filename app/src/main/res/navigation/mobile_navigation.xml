@@ -8,18 +8,73 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.ubaya.uts_advnative_160419072.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Ubaya Kuliner"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_resto"
+            app:destination="@id/navigation_resto"
+            app:popUpTo="@id/navigation_home" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search"
         android:name="com.ubaya.uts_advnative_160419072.ui.search.SearchFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_search" />
+        android:label="Cari Resto"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_resto"
+            app:destination="@id/navigation_resto"
+            app:popUpTo="@id/navigation_search" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:name="com.ubaya.uts_advnative_160419072.ui.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:label="Profil"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.ubaya.uts_advnative_160419072.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_register"
+            app:destination="@id/navigation_register" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.ubaya.uts_advnative_160419072.ui.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_navigation_register_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_resto"
+        android:name="com.ubaya.uts_advnative_160419072.ui.resto.RestoFragment"
+        android:label="Detail Resto"
+        tools:layout="@layout/fragment_resto">
+        <action
+            android:id="@+id/action_navigation_resto_to_navigation_reviews"
+            app:destination="@id/navigation_reviews"
+            app:popUpTo="@id/navigation_resto" />
+        <argument
+            android:name="resto"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_reviews"
+        android:name="com.ubaya.uts_advnative_160419072.ui.reviews.ReviewsFragment"
+        android:label="Ulasan"
+        tools:layout="@layout/fragment_reviews" >
+        <argument
+            android:name="resto"
+            app:argType="integer" />
+    </fragment>
 </navigation>
