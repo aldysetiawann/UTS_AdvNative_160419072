@@ -31,7 +31,12 @@
         android:id="@+id/navigation_profile"
         android:name="com.ubaya.uts_advnative_160419072.ui.profile.ProfileFragment"
         android:label="Profil"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_edit_profile"
+            app:destination="@id/navigation_edit_profile"
+            app:popUpTo="@id/navigation_profile" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.ubaya.uts_advnative_160419072.ui.login.LoginFragment"
@@ -77,4 +82,9 @@
             android:name="resto"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_edit_profile"
+        android:name="com.ubaya.uts_advnative_160419072.ui.edit_profile.EditProfileFragment"
+        android:label="Edit Profil"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

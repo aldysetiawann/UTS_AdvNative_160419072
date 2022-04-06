@@ -25,7 +25,7 @@ class RestoViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun loadResto(resto: Int) {
         viewModelScope.launch {
-            val url = "http://10.0.2.2/ubayakuliner/detailrestoran.php?restoran=$resto"
+            val url = "http://10.0.2.2:8080/ubayakuliner/detailrestoran.php?restoran=$resto"
             val queue = Volley.newRequestQueue(app.applicationContext)
             val request = StringRequest(url,
                 {

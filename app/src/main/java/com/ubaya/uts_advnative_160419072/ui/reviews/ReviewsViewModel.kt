@@ -18,7 +18,7 @@ import org.json.JSONObject
 class ReviewsViewModel(private val app: Application) : AndroidViewModel(app) {
 
     private val _listReview = MutableLiveData<List<Review>>(listOf())
-    val listReview: LiveData<List<Review>> = _listReview
+    val listReview: LiveData<List<Review>> = _listReview // list[review(asd, 4, "tes"), ...]
 
     private val _review = MutableLiveData<Review>()
     val review: LiveData<Review> = _review
@@ -31,7 +31,7 @@ class ReviewsViewModel(private val app: Application) : AndroidViewModel(app) {
     fun loadReview(resto: Int) {
         viewModelScope.launch {
             val user = Globals.user
-            val url = "http://10.0.2.2/ubayakuliner/reviews.php?restoran=$resto&user=${user.username}"
+            val url = "http://10.0.2.2:8080/ubayakuliner/reviews.php?restoran=$resto&user=${user.username}"
             val queue = Volley.newRequestQueue(app.applicationContext)
             val request = StringRequest(url,
                 {
@@ -64,7 +64,7 @@ class ReviewsViewModel(private val app: Application) : AndroidViewModel(app) {
     fun addReview(resto: Int, rating: Int, komentar: String? = null) {
         viewModelScope.launch {
             val user = Globals.user
-            val url = "http://10.0.2.2/ubayakuliner/addreview.php"
+            val url = "http://10.0.2.2:8080/ubayakuliner/addreview.php"
             val queue = Volley.newRequestQueue(app.applicationContext)
             val request = object : StringRequest(Method.POST, url,
                 {

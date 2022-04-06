@@ -40,9 +40,7 @@ class ReviewsFragment : Fragment() {
         viewModel = ViewModelProvider(this)[ReviewsViewModel::class.java]
         observer(viewModel)
 
-        if (viewModel.listReview.value.isNullOrEmpty()) {
-            viewModel.loadReview(resto)
-        }
+        viewModel.loadReview(resto)
 
         adapter = ListReviewAdapter(listReview)
         val layoutManager = LinearLayoutManager(requireContext())
@@ -59,9 +57,9 @@ class ReviewsFragment : Fragment() {
                     .show()
             } else {
                 if (komentar.isEmpty()) {
-                    viewModel.addReview(resto, binding.reviewsRating.rating.toInt(), komentar)
-                } else {
                     viewModel.addReview(resto, binding.reviewsRating.rating.toInt())
+                } else {
+                    viewModel.addReview(resto, binding.reviewsRating.rating.toInt(), komentar)
                 }
             }
         }
@@ -69,29 +67,26 @@ class ReviewsFragment : Fragment() {
 
     private fun observer(viewModel: ReviewsViewModel) {
         viewModel.listReview.observe(viewLifecycleOwner) {
-            listReview.clear()
+            listReview.clear() // []
 
             if (it.isNotEmpty()) {
-                listReview.addAll(it)
-
-                for (i in 0 until listReview.size) {
-                    adapter.notifyItemInserted(0)
-                }
+                listReview.addAll(it) // [review(asd, 4, tes)]
+                adapter.notifyDataSetChanged() // munculin data ke list
             }
         }
 
         viewModel.isReviewed.observe(viewLifecycleOwner) {
             if (it) {
-                binding.cardReview.visibility = View.GONE
+                binding.cardReview.visibility = View.GONE // input review di hide
             } else {
-                binding.cardReview.visibility = View.VISIBLE
+                binding.cardReview.visibility = View.VISIBLE // input review di show
             }
         }
 
         viewModel.review.observe(viewLifecycleOwner) {
-            listReview.add(it)
+            listReview.add(it) // [review(asd, 4, tes), review(dsa, 5, null)]
             adapter.notifyDataSetChanged()
-            viewModel.isReviewed.value = false
+            viewModel.isReviewed.value = true
         }
 
         viewModel.loading.observe(viewLifecycleOwner) {

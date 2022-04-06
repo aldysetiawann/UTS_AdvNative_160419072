@@ -25,7 +25,7 @@ class RegisterViewModel(private val app: Application) : AndroidViewModel(app) {
     fun register(username: String, password: String) {
         loading.value = true
         viewModelScope.launch {
-            val url = "http://10.0.2.2/ubayakuliner/register.php"
+            val url = "http://10.0.2.2:8080/ubayakuliner/register.php"
             val queue = Volley.newRequestQueue(app.applicationContext)
             val request = object : StringRequest(
                 Method.POST, url,
